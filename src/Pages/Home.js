@@ -595,7 +595,7 @@ export default function Home() {
               <div className="relative mt-16 h-80 lg:mt-8 self-center items-center">
                 <div className="mt-10 flex items-center justify-center gap-x-6 self-center my-auto justify-items-center">
                   <a
-                    href="#"
+                    href="/register"
                     className="rounded-md bg-sky-600 text-white px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-sky-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                     Get started
                   </a>
