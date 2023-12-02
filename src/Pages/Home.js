@@ -106,7 +106,7 @@ export default function Home() {
             </main>
           </div>
           <main className="flex justify-center lg:justify-end mt-6">
-            <button className="flex flex-row items-center gap-2 p-3 rounded text-sky-700 font-bold ">
+            <button className="flex flex-row items-center gap-2 p-3 rounded text-sky-700 font-bold " onClick={()=>navigate('/register')}>
               GET STARTED
               <AiOutlineArrowRight />
             </button>
