@@ -54,7 +54,7 @@ export default function Home() {
               tools and expertise needed to make confident investment decisions.
             </label>
             <div className="flex gap-6 mt-5">
-              <button className="bg-white text-indigo-600 font-semibold p-3 rounded" onClick={()=>navigate ('/login')}>
+              <button className="bg-white text-indigo-600 font-semibold p-3 rounded" onClick={()=>navigate('/login')}>
                 GET STARTED
               </button>
               <button className="text-white font-semibold">HOW IT WORKS</button>
