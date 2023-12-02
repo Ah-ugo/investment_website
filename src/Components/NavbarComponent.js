@@ -61,7 +61,7 @@ export default function NavbarComponent() {
               Log in <span aria-hidden="true">&rarr;</span>
             </a>
             <a
-              href="#"
+              href="/register"
               className="text-sm font-semibold leading-6 bg-white p-1 text-indigo-600 rounded hover:bg-indigo-300">
               Register
               {/* <span aria-hidden="true">&rarr;</span> */}
@@ -111,7 +111,7 @@ export default function NavbarComponent() {
                     Log in
                   </a>
                   <a
-                    href="#"
+                    href="/register"
                     className="text-sm font-semibold leading-6 bg-indigo-600 p-1 text-white rounded hover:bg-indigo-300">
                     Register
                     {/* <span aria-hidden="true">&rarr;</span> */}
