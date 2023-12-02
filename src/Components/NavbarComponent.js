@@ -57,7 +57,7 @@ export default function NavbarComponent() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3 align-middle">
-            <a href="#" className="text-sm font-semibold leading-6 text-white">
+            <a href="/login" className="text-sm font-semibold leading-6 text-white">
               Log in <span aria-hidden="true">&rarr;</span>
             </a>
             <a
