@@ -43,6 +43,11 @@ export default function Home() {
       <NavbarComponent />
       <Helmet>
         <title>Sigmaphi Investment</title>
+        {/* <link rel="icon" href={require("../../public/Sigmaphi.jpg")} /> */}
+        {/* <link
+          rel="apple-touch-icon"
+          href={require("../../public/Sigmaphi.jpg")}
+        /> */}
         <meta
           name="description"
           content="Explore opportunities and make informed investment decisions with SigmaPhi, your trusted partner in financial growth. Discover a wide range of investment options and expert insights to enhance your portfolio. Start your journey towards financial success today."
