@@ -43,6 +43,30 @@ export default function Home() {
       <NavbarComponent />
       <Helmet>
         <title>Sigmaphi Investment</title>
+        <meta
+          name="description"
+          content="Explore opportunities and make informed investment decisions with SigmaPhi, your trusted partner in financial growth. Discover a wide range of investment options and expert insights to enhance your portfolio. Start your journey towards financial success today."
+        />
+        {/* Facebook tags */}
+        {/* <meta property="og:type" content={type} /> */}
+        <meta property="og:title" content={"Sigmaphi Investment"} />
+        <meta
+          property="og:description"
+          content={
+            "Explore opportunities and make informed investment decisions with SigmaPhi, your trusted partner in financial growth. Discover a wide range of investment options and expert insights to enhance your portfolio. Start your journey towards financial success today."
+          }
+        />
+        {/* Twitter tags */}
+        {/* <meta name="twitter:creator" content={name} />} */}
+        <meta name="twitter:card" content={"card"} />
+        <meta name="twitter:title" content={"Sigmaphi Investment"} />
+        <meta
+          name="twitter:description"
+          content={
+            "Explore opportunities and make informed investment decisions with SigmaPhi, your trusted partner in financial growth. Discover a wide range of investment options and expert insights to enhance your portfolio. Start your journey towards financial success today."
+          }
+        />
+        {/* End Twitter tags */}
       </Helmet>
       <div className="pt-12 lg:pt-28">
         <main className="grid grid-cols-1 lg:grid-cols-2 p-6 lg:gap-48">
