@@ -16,6 +16,7 @@ import {
 } from "react-icons/ai";
 import { RiSecurePaymentLine } from "react-icons/ri";
 import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 
 const stats = [
   {
@@ -34,6 +35,7 @@ const stats = [
 ];
 
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <div
       className=""
@@ -56,7 +58,9 @@ export default function Home() {
               tools and expertise needed to make confident investment decisions.
             </label>
             <div className="flex gap-6 mt-5">
-              <button className="bg-white text-indigo-600 font-semibold p-3 rounded">
+              <button
+                className="bg-white text-indigo-600 font-semibold p-3 rounded"
+                onClick={() => navigate("/login")}>
                 GET STARTED
               </button>
               <button className="text-white font-semibold">HOW IT WORKS</button>
@@ -108,7 +112,9 @@ export default function Home() {
             </main>
           </div>
           <main className="flex justify-center lg:justify-end mt-6">
-            <button className="flex flex-row items-center gap-2 p-3 rounded text-sky-700 font-bold ">
+            <button
+              className="flex flex-row items-center gap-2 p-3 rounded text-sky-700 font-bold "
+              onClick={() => navigate("/register")}>
               GET STARTED
               <AiOutlineArrowRight />
             </button>
@@ -169,7 +175,9 @@ export default function Home() {
                 </div>
               </div>
               <div className="mt-6">
-                <button className="bg-white w-full text-sky-600 flex flex-row items-center justify-center rounded text-lg font-bold p-3 gap-2">
+                <button
+                  className="bg-white w-full text-sky-600 flex flex-row items-center justify-center rounded text-lg font-bold p-3 gap-2"
+                  onClick={() => navigate("/register")}>
                   <AiOutlineCheck className="font-bold" />
                   Invest Now
                 </button>
@@ -221,7 +229,9 @@ export default function Home() {
                 </div>
               </div>
               <div className="mt-6">
-                <button className="bg-white w-full text-sky-600 flex flex-row items-center justify-center rounded text-lg font-bold p-3 gap-2">
+                <button
+                  onClick={() => navigate("/register")}
+                  className="bg-white w-full text-sky-600 flex flex-row items-center justify-center rounded text-lg font-bold p-3 gap-2">
                   <AiOutlineCheck className="font-bold" />
                   Invest Now
                 </button>
@@ -276,7 +286,9 @@ export default function Home() {
                 </div>
               </div>
               <div className="mt-6">
-                <button className="bg-white w-full text-sky-600 flex flex-row items-center justify-center rounded text-lg font-bold p-3 gap-2">
+                <button
+                  onClick={() => navigate("/register")}
+                  className="bg-white w-full text-sky-600 flex flex-row items-center justify-center rounded text-lg font-bold p-3 gap-2">
                   <AiOutlineCheck className="font-bold" />
                   Invest Now
                 </button>
@@ -334,7 +346,9 @@ export default function Home() {
                 </div>
               </div>
               <div className="mt-6">
-                <button className="bg-white w-full text-sky-600 flex flex-row items-center justify-center rounded text-lg font-bold p-3 gap-2">
+                <button
+                  onClick={() => navigate("/register")}
+                  className="bg-white w-full text-sky-600 flex flex-row items-center justify-center rounded text-lg font-bold p-3 gap-2">
                   <AiOutlineCheck className="font-bold" />
                   Invest Now
                 </button>
@@ -391,7 +405,9 @@ export default function Home() {
                 </div>
               </div>
               <div className="mt-6">
-                <button className="bg-white w-full text-sky-600 flex flex-row items-center justify-center rounded text-lg font-bold p-3 gap-2">
+                <button
+                  onClick={() => navigate("/register")}
+                  className="bg-white w-full text-sky-600 flex flex-row items-center justify-center rounded text-lg font-bold p-3 gap-2">
                   <AiOutlineCheck className="font-bold" />
                   Invest Now
                 </button>
@@ -449,7 +465,9 @@ export default function Home() {
                 </div>
               </div>
               <div className="mt-6">
-                <button className="bg-white w-full text-sky-600 flex flex-row items-center justify-center rounded text-lg font-bold p-3 gap-2">
+                <button
+                  onClick={() => navigate("/register")}
+                  className="bg-white w-full text-sky-600 flex flex-row items-center justify-center rounded text-lg font-bold p-3 gap-2">
                   <AiOutlineCheck className="font-bold" />
                   Invest Now
                 </button>
@@ -597,7 +615,7 @@ export default function Home() {
               <div className="relative mt-16 h-80 lg:mt-8 self-center items-center">
                 <div className="mt-10 flex items-center justify-center gap-x-6 self-center my-auto justify-items-center">
                   <a
-                    href="#"
+                    href="/register"
                     className="rounded-md bg-sky-600 text-white px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-sky-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                     Get started
                   </a>

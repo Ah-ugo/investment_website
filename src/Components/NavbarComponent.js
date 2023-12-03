@@ -57,11 +57,11 @@ export default function NavbarComponent() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3 align-middle">
-            <a href="#" className="text-sm font-semibold leading-6 text-white">
+            <a href="/login" className="text-sm font-semibold leading-6 text-white">
               Log in <span aria-hidden="true">&rarr;</span>
             </a>
             <a
-              href="#"
+              href="/register"
               className="text-sm font-semibold leading-6 bg-white p-1 text-indigo-600 rounded hover:bg-indigo-300">
               Register
               {/* <span aria-hidden="true">&rarr;</span> */}
@@ -106,12 +106,12 @@ export default function NavbarComponent() {
                 </div>
                 <div className="py-6">
                   <a
-                    href="#"
+                    href="/login"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                     Log in
                   </a>
                   <a
-                    href="#"
+                    href="/register"
                     className="text-sm font-semibold leading-6 bg-indigo-600 p-1 text-white rounded hover:bg-indigo-300">
                     Register
                     {/* <span aria-hidden="true">&rarr;</span> */}
