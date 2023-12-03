@@ -15,6 +15,7 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 import { RiSecurePaymentLine } from "react-icons/ri";
+import { Helmet } from "react-helmet-async";
 
 const stats = [
   {
@@ -38,6 +39,9 @@ export default function Home() {
       className=""
       style={{ backgroundImage: "linear-gradient(180deg,#0a3a96,#02aeee)" }}>
       <NavbarComponent />
+      <Helmet>
+        <title>Sigmaphi Investment</title>
+      </Helmet>
       <div className="pt-12 lg:pt-28">
         <main className="grid grid-cols-1 lg:grid-cols-2 p-6 lg:gap-48">
           <div className="flex flex-col lg:mt-10">
