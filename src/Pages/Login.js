@@ -3,11 +3,14 @@ import Lottie from "react-lottie-player";
 import Lottiedata from "../Components/Assets/Images/AnimeLottie/63787-secure-login.json";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 export default function Login() {
   const [userName, setUserName] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const config = {
     headers: {
@@ -18,6 +21,7 @@ export default function Login() {
   };
 
   const Authenticate = async () => {
+    setLoading(true);
     await axios
       .get(
         `https://parseapi.back4app.com/login?username=${userName}&password=${password}`,
@@ -28,6 +32,7 @@ export default function Login() {
         console.log(res);
         localStorage.setItem("userData122", JSON.stringify(res.data));
         window.location.href = "/userDashboard";
+        setLoading(false);
 
         // Check the status code using 'res'
         // if (res.status === "200") {
@@ -121,7 +126,21 @@ export default function Login() {
                 // type="submit"
                 onClick={Authenticate}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                Sign in
+                {loading ? (
+                  <Spin
+                    indicator={
+                      <LoadingOutlined
+                        style={{
+                          fontSize: 24,
+                          color: "white",
+                        }}
+                        spin
+                      />
+                    }
+                  />
+                ) : (
+                  "Sign in"
+                )}
               </button>
             </div>
           </div>

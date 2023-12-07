@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import copy from "copy-to-clipboard";
 
 export default function ReferralCard() {
+  const domainName = window.location.hostname;
+  const pathName = "/register";
+  const userInfo = localStorage.getItem("userData122");
+  const userMain = JSON.parse(userInfo);
+  const [referal, setReferal] = useState(
+    domainName + pathName + `?ref=${userMain.objectId}`
+  );
+
+  const url = () => {
+    copy(referal);
+    alert(`You have copied "${referal}"`);
+  };
   return (
     <div>
       <div className="mb-12 xl:mb-0 mt-4">
@@ -20,9 +33,13 @@ export default function ReferralCard() {
                   <input
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 w-full text-gray-700 text-sm border-none outline-none focus:ring ease-linear transition-all duration-150"
-                    defaultValue={""}
+                    defaultValue={referal}
+                    disabled
                   />
-                  <button type="button" className="btn w-16">
+                  <button
+                    type="button"
+                    className="btn w-16"
+                    onClick={() => url()}>
                     Copy
                   </button>
                 </div>
