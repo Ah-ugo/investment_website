@@ -4,7 +4,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Parse from "parse";
 import NavbarComponent from "../Components/NavbarComponent";
 import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
+import { Alert, Spin } from "antd";
+import { FaNairaSign } from "react-icons/fa6";
 
 export default function Register() {
   const [firstName, setFirstName] = useState("");
@@ -13,12 +14,14 @@ export default function Register() {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [streetAddress, setStreetAddress] = useState("");
+  const [investment, setInvestment] = useState();
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
 
   const [loading, setLoading] = useState(false);
+  const [successAlert, setSuccessAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false);
 
   const [searchParams] = useSearchParams();
   const queryParam = searchParams.get("ref");
@@ -50,17 +53,52 @@ export default function Register() {
         referralCode: queryParam,
         Image: Parsepass,
         phoneNumber: phone,
-      }).then((res) => {
-        setLoading(false);
-        console.log(res);
-        // setInfo(true);
-        navigate("/login");
-      });
+        investment_amount: investment,
+        return_rate: investment / 2,
+      })
+        .then((res) => {
+          setLoading(false);
+          console.log(res);
+          // setInfo(true);
+          setSuccessAlert(true);
+          setErrorAlert(false);
+          navigate("/login");
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err);
+          setSuccessAlert(false);
+          setErrorAlert(true);
+          return (
+            <Alert
+              message="Error"
+              description="Check Your Internet Connection And Fill In All The Details"
+              type="error"
+              showIcon
+            />
+          );
+        });
     }
     //   };
   };
   return (
     <div>
+      {successAlert ? (
+        <Alert
+          message="Registration Successful"
+          description="Your registration was successful"
+          type="success"
+          showIcon
+        />
+      ) : null}
+      {errorAlert ? (
+        <Alert
+          message="Error"
+          description="Unsuccessful Registration"
+          type="error"
+          showIcon
+        />
+      ) : null}
       <section class="bg-gray-50">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
           <a
@@ -92,7 +130,7 @@ export default function Register() {
                     id="email"
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                     placeholder="name@company.com"
-                    required=""
+                    required
                   />
                 </div>
                 <div>
@@ -108,7 +146,7 @@ export default function Register() {
                     id="password"
                     placeholder="••••••••"
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    required=""
+                    required
                   />
                 </div>
                 <div>
@@ -124,7 +162,7 @@ export default function Register() {
                     id="confirm-password"
                     placeholder="••••••••"
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    required=""
+                    required
                   />
                 </div>
 
@@ -141,7 +179,7 @@ export default function Register() {
                     onChange={(e) => setUserName(e.target.value)}
                     placeholder="Username"
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    required=""
+                    required
                   />
                 </div>
 
@@ -158,7 +196,7 @@ export default function Register() {
                     defaultValue={queryParam}
                     placeholder="Referral Code"
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    required=""
+                    required
                   />
                 </div>
 
@@ -175,9 +213,45 @@ export default function Register() {
                     id="phone"
                     placeholder="Phone Number"
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    required=""
+                    required
                   />
                 </div>
+
+                <label
+                  for="countries_disabled"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Select a plan
+                </label>
+                <select
+                  required
+                  id="countries_disabled"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option selected>Choose a plan</option>
+                  <option value={2000}>
+                    Standard -{" "}
+                    <FaNairaSign className="text-black-600 font-bold" /> 2000
+                  </option>
+                  <option value={6000}>
+                    Bronze -{" "}
+                    <FaNairaSign className="text-black-600 font-bold" /> 6000
+                  </option>
+                  <option value={10000}>
+                    Silver -{" "}
+                    <FaNairaSign className="text-black-600 font-bold" /> 10000
+                  </option>
+                  <option value={14000}>
+                    Gold - <FaNairaSign className="text-black-600 font-bold" />{" "}
+                    14000
+                  </option>
+                  <option value={18000}>
+                    Emerald -{" "}
+                    <FaNairaSign className="text-black-600 font-bold" /> 18000
+                  </option>
+                  <option value={22000}>
+                    Ruby - <FaNairaSign className="text-black-600 font-bold" />{" "}
+                    22000
+                  </option>
+                </select>
 
                 <label class="block mb-6">
                   <span class="text-gray-700">Your photo</span>
@@ -188,6 +262,7 @@ export default function Register() {
                     type="file"
                     className="userImg"
                     class="
+                    userImg
             block
             w-full
             mt-1

@@ -18,19 +18,23 @@ export default function OverView() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
           <SmallCards
             title={"Balance"}
-            amount={userMain.investment_amount + userMain.return_rate}
+            amount={
+              "NaN" ? 0 : userMain?.investment_amount + userMain?.return_rate
+            }
             icon={<FaNairaSign className="text-blue-600 font-bold" />}
             description={"Total Amount Remaining"}
           />
           <SmallCards
             title={"Revenue"}
-            amount={userMain.return_rate}
+            amount={userMain?.return_rate ? userMain?.return_rate : 0}
             icon={<AiOutlineLineChart className="text-blue-600 font-bold" />}
             description={"Total Revenue Gained"}
           />
           <SmallCards
             title={"Investment"}
-            amount={userMain.investment_amount}
+            amount={
+              userMain?.investment_amount ? userMain?.investment_amount : 0
+            }
             icon={<CiMoneyBill className="text-blue-600 font-bold" />}
             description={"Total Money Invested"}
           />
