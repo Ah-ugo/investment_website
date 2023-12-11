@@ -19,7 +19,9 @@ export default function OverView() {
           <SmallCards
             title={"Balance"}
             amount={
-              "NaN" ? 0 : userMain?.investment_amount + userMain?.return_rate
+              userMain?.investment_amount + userMain?.return_rate
+                ? userMain?.investment_amount + userMain?.return_rate
+                : 0
             }
             icon={<FaNairaSign className="text-blue-600 font-bold" />}
             description={"Total Amount Remaining"}

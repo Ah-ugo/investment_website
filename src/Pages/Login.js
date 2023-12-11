@@ -3,8 +3,12 @@ import Lottie from "react-lottie-player";
 import Lottiedata from "../Components/Assets/Images/AnimeLottie/63787-secure-login.json";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { LoadingOutlined } from "@ant-design/icons";
-import { Alert, Spin } from "antd";
+import {
+  FrownOutlined,
+  LoadingOutlined,
+  SmileOutlined,
+} from "@ant-design/icons";
+import { Alert, Spin, Modal } from "antd";
 
 export default function Login() {
   const [userName, setUserName] = useState();
@@ -53,22 +57,35 @@ export default function Login() {
   };
   return (
     <div>
-      {successAlert ? (
-        <Alert
-          message="Registration Successful"
-          description="Your login was successful"
-          type="success"
-          showIcon
-        />
-      ) : null}
-      {errorAlert ? (
-        <Alert
-          message="Error"
-          description="Unsuccessful login"
-          type="error"
-          showIcon
-        />
-      ) : null}
+      <Modal
+        title="Successful Login"
+        open={successAlert}
+        footer={null}
+        className="flex gap-2 align-middle items-center"
+        onCancel={() => setSuccessAlert(false)}>
+        <div className="flex gap-2 align-middle items-center">
+          <SmileOutlined height={45} width={45} size={38} />
+          <p>You are now logged in</p>
+        </div>
+      </Modal>
+      <Modal
+        title="Login Unsuccessful"
+        open={errorAlert}
+        footer={null}
+        onCancel={() => setErrorAlert(false)}>
+        <div className="flex gap-2 align-middle items-center">
+          <FrownOutlined
+            height={45}
+            width={45}
+            size={38}
+            className="w-10 h-10"
+          />
+          <p>
+            Oh no! We encountered an error while processing your login. Please
+            check your username and password.
+          </p>
+        </div>
+      </Modal>
       <div
         style={{
           // backgroundImage: "linear-gradient(180deg,#0a3a96,#02aeee)",
@@ -99,7 +116,7 @@ export default function Login() {
                 <label
                   htmlFor="email"
                   className="block text-sm font-medium leading-6 text-gray-900">
-                  Email address
+                  Username
                 </label>
                 <div className="mt-2">
                   <input

@@ -3,8 +3,12 @@ import { HiOutlinePhoto } from "react-icons/hi2";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Parse from "parse";
 import NavbarComponent from "../Components/NavbarComponent";
-import { LoadingOutlined } from "@ant-design/icons";
-import { Alert, Spin } from "antd";
+import {
+  FrownOutlined,
+  LoadingOutlined,
+  SmileOutlined,
+} from "@ant-design/icons";
+import { Alert, Spin, Modal } from "antd";
 import { FaNairaSign } from "react-icons/fa6";
 
 export default function Register() {
@@ -83,22 +87,24 @@ export default function Register() {
   };
   return (
     <div>
-      {successAlert ? (
-        <Alert
-          message="Registration Successful"
-          description="Your registration was successful"
-          type="success"
-          showIcon
-        />
-      ) : null}
-      {errorAlert ? (
-        <Alert
-          message="Error"
-          description="Unsuccessful Registration"
-          type="error"
-          showIcon
-        />
-      ) : null}
+      <Modal title="Successful Registration" open={successAlert} footer={null}>
+        <div className="flex gap-2 align-middle items-center">
+          <SmileOutlined height={45} width={45} size={38} />
+          <p>
+            Welcome to the community! Your account has been successfully
+            created. You can now access all of our features and benefits.
+          </p>
+        </div>
+      </Modal>
+      <Modal title="Registration Unsuccessful" open={errorAlert} footer={null}>
+        <div className="flex gap-2 align-middle items-center">
+          <FrownOutlined height={45} width={45} size={38} />
+          <p>
+            Oh no! We encountered an error while processing your registration.
+            Please try again later.
+          </p>
+        </div>
+      </Modal>
       <section class="bg-gray-50">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
           <a
