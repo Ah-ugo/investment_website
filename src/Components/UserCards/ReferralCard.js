@@ -27,7 +27,7 @@ export default function ReferralCard() {
 
   const getReferralDetails = () => {
     axios
-      .get(`https://sigmaphi.b4a.io/users/RWlMSWQbTm`, config)
+      .get(`https://sigmaphi.b4a.io/users/${userMain.objectId}`, config)
       .then((res) => {
         // const resp = JSON.stringify(res.data);
         // const respo = JSON.parse(resp);
