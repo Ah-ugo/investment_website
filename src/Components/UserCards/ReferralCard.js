@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import copy from "copy-to-clipboard";
+import axios from "axios";
 
 export default function ReferralCard() {
   const domainName = window.location.hostname;
@@ -9,11 +10,37 @@ export default function ReferralCard() {
   const [referal, setReferal] = useState(
     domainName + pathName + `?ref=${userMain.objectId}`
   );
+  const [userData, setUserData] = useState({});
 
   const url = () => {
     copy(referal);
     alert(`You have copied "${referal}"`);
   };
+
+  const config = {
+    headers: {
+      accept: "application/json",
+      "X-Parse-Application-Id": "o2sxP1a3p8X7pcnr1Hedh8vh6NfP1HJMjF6GhsJ7",
+      "X-Parse-REST-API-Key": "J66ZpMiZBgxEXDSAlWiUcSYMjjLV6FAuX8y0huJE",
+    },
+  };
+
+  const getReferralDetails = () => {
+    axios
+      .get(`https://sigmaphi.b4a.io/users/RWlMSWQbTm`, config)
+      .then((res) => {
+        // const resp = JSON.stringify(res.data);
+        // const respo = JSON.parse(resp);
+        console.log(res.data + "ghhjjuy");
+        setUserData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    getReferralDetails();
+  }, []);
   return (
     <div>
       <div className="mb-12 xl:mb-0 mt-4">
@@ -70,19 +97,27 @@ export default function ReferralCard() {
               <div className="px-4">
                 <div className="h-20-px flex flex-wrap md:flex-nowrap md:text-left text-center">
                   <div className="px-4 py-2 w-full">
-                    <span className="font-bold block text-xl"></span>
+                    <span className="font-bold block text-xl">
+                      {userData?.referal ? userData?.referal : 0}
+                    </span>
                     <span className="text-sm block text-gray-200">
                       Total Invited
                     </span>
                   </div>
                   <div className="px-4 py-2 w-full">
-                    <span className="font-bold block text-xl"></span>
+                    <span className="font-bold block text-xl">
+                      {userData?.referral ? userData?.referral : 0}
+                    </span>
                     <span className="text-sm block text-gray-200">
                       Total Converted
                     </span>
                   </div>
                   <div className="px-4 py-2 w-full">
-                    <span className="font-bold block text-xl"></span>
+                    <span className="font-bold block text-xl">
+                      {userData?.referralEarning
+                        ? userData?.referralEarning
+                        : 0}
+                    </span>
                     <span className="text-sm block text-gray-200">
                       Total Earnings
                     </span>
