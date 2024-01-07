@@ -98,7 +98,7 @@ export default function ReferralCard() {
                 <div className="h-20-px flex flex-wrap md:flex-nowrap md:text-left text-center">
                   <div className="px-4 py-2 w-full">
                     <span className="font-bold block text-xl">
-                      {userData?.referal ? userData?.referal : 0}
+                      {userData?.referral ? userData?.referral : 0}
                     </span>
                     <span className="text-sm block text-gray-200">
                       Total Invited

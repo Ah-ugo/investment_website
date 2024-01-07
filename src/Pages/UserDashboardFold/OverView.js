@@ -12,6 +12,7 @@ import axios from "axios";
 export default function OverView() {
   const [depositData, setDepositData] = useState([]);
   const [withdrawData, setWithdrawData] = useState([]);
+  const [userData, setUserData] = useState({});
   const userInfo = localStorage.getItem("userData122");
   const userMain = JSON.parse(userInfo);
 
@@ -32,7 +33,7 @@ export default function OverView() {
       .get(depositUrl, config)
       .then((res) => {
         console.log(res);
-        setDepositData(res.data);
+        setDepositData(res.data.results);
       })
       .catch((err) => {
         console.log(err);
@@ -44,7 +45,21 @@ export default function OverView() {
       .get(withdrawUrl, config)
       .then((res) => {
         console.log(res);
-        setWithdrawData(res.data);
+        setWithdrawData(res.data.results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const UserDetails = () => {
+    axios
+      .get(`https://sigmaphi.b4a.io/users/${userMain.objectId}`, config)
+      .then((res) => {
+        // const resp = JSON.stringify(res.data);
+        // const respo = JSON.parse(resp);
+        console.log(res.data + "ghhjjuy");
+        setUserData(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -54,6 +69,7 @@ export default function OverView() {
   useEffect(() => {
     getAllDeposit();
     getAllWithdrawal();
+    UserDetails();
   }, []);
   return (
     <div>
@@ -62,20 +78,20 @@ export default function OverView() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
           <SmallCards
             title={"Balance"}
-            amount={userMain?.balance ? userMain?.balance : 0}
+            amount={userData?.balance ? userData?.balance : 0}
             icon={<FaNairaSign className="text-blue-600 font-bold" />}
             description={"Total Amount Remaining"}
           />
           <SmallCards
             title={"Revenue"}
-            amount={userMain?.return_rate ? userMain?.return_rate : 0}
+            amount={userData?.return_rate ? userData?.return_rate : 0}
             icon={<AiOutlineLineChart className="text-blue-600 font-bold" />}
             description={"Total Revenue Gained"}
           />
           <SmallCards
             title={"Investment Plan"}
             amount={
-              userMain?.investment_amount ? userMain?.investment_amount : 0
+              userData?.investment_amount ? userData?.investment_amount : 0
             }
             icon={<CiMoneyBill className="text-blue-600 font-bold" />}
             description={"Total Money Invested"}

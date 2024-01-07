@@ -5,14 +5,14 @@ export default function RecentInvestmentTable() {
     <table class="table-auto">
       <thead>
         <tr>
-          <th>Song</th>
-          <th>Artist</th>
-          <th>Year</th>
+          <th>Action</th>
+          <th>Amount</th>
+          <th>Balance</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+          <td>Deposit</td>
           <td>Malcolm Lockyer</td>
           <td>1961</td>
         </tr>

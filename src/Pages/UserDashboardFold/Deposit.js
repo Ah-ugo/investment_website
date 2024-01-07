@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserDashboard from "../UserDashboard";
 import WithdrawCard from "../../Components/UserCards/WithdrawCard";
 import { FaNairaSign } from "react-icons/fa6";
@@ -6,20 +6,28 @@ import { TbCurrencyNaira } from "react-icons/tb";
 import DepositCard from "../../Components/UserCards/DepositCard";
 import copy from "copy-to-clipboard";
 import axios from "axios";
-import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
+import {
+  FrownOutlined,
+  LoadingOutlined,
+  SmileOutlined,
+} from "@ant-design/icons";
+import { Modal, Spin } from "antd";
 
 export default function Deposit() {
   const [accountName, setAccountName] = useState("SigmaPhi Investment");
   const [bankName, setBankName] = useState("Palmpay");
   const [accountNumber, setAccountNumber] = useState("9011232567");
+  const [userData, setUserData] = useState({});
   const userInfo = localStorage.getItem("userData122");
   const mainUser = JSON.parse(userInfo);
+  const userMain = JSON.parse(userInfo);
   const [depositAmount, setDepositAmount] = useState(
-    mainUser?.investment_amount
+    mainUser?.investment_amount ? mainUser?.investment_amount : 0
   );
   const [narration, setNarration] = useState(mainUser?.objectId);
   const [loading, setLoading] = useState(false);
+  const [successAlert, setSuccessAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false);
 
   const copyAccountName = () => {
     copy(accountName);
@@ -67,17 +75,72 @@ export default function Deposit() {
     await axios
       .post(url, payload, config)
       .then((res) => {
+        setSuccessAlert(true);
+        setErrorAlert(false);
         console.log(res);
         setLoading(false);
+      })
+      .catch((err) => {
+        setSuccessAlert(false);
+        setErrorAlert(true);
+        console.log(err);
+      });
+  };
+
+  const UserDetails = () => {
+    axios
+      .get(`https://sigmaphi.b4a.io/users/${userMain.objectId}`, config)
+      .then((res) => {
+        // const resp = JSON.stringify(res.data);
+        // const respo = JSON.parse(resp);
+        console.log(res.data + "ghhjjuy");
+        setUserData(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
+  useEffect(() => {
+    UserDetails();
+  }, []);
+
   return (
     <>
       <UserDashboard>
+        <Modal
+          title="Successful Request"
+          open={successAlert}
+          footer={null}
+          className="flex gap-2 align-middle items-center"
+          onCancel={() => setSuccessAlert(false)}>
+          <div className="flex gap-2 align-middle items-center">
+            <SmileOutlined height={45} width={45} size={38} />
+            <p>
+              Deposit Verification In Progress (Your Balance Will Be Updated
+              Once Deposit Is Verified){" "}
+            </p>
+          </div>
+        </Modal>
+
+        <Modal
+          title="Request Unsuccessful"
+          open={errorAlert}
+          footer={null}
+          onCancel={() => setErrorAlert(false)}>
+          <div className="flex gap-2 align-middle items-center">
+            <FrownOutlined
+              height={45}
+              width={45}
+              size={38}
+              className="w-10 h-10"
+            />
+            <p>
+              Oh no! We encountered an error while processing your request.
+              Please check your internet connection.
+            </p>
+          </div>
+        </Modal>
         <h1 className="font-bold text-2xl text-gray-800 mb-4">Fund Wallet</h1>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           <WithdrawCard>
@@ -93,7 +156,7 @@ export default function Deposit() {
               <div className="flex items-center gap-1 text-white">
                 <TbCurrencyNaira className="text-lg" />
                 <label className="text-lg font-medium">
-                  {mainUser?.investment_amount + mainUser.return_rate}
+                  {userData.balance ? userData.balance : 0}
                 </label>
               </div>
             </div>
@@ -110,7 +173,7 @@ export default function Deposit() {
             <div className="flex items-center gap-1 text-white">
               <TbCurrencyNaira className="text-lg" />
               <label className="text-lg font-medium">
-                {mainUser?.investment_amount}
+                {userData?.investment_amount ? userData?.investment_amount : 0}
               </label>
             </div>
           </WithdrawCard>
@@ -195,7 +258,7 @@ export default function Deposit() {
                   <input
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 w-full text-gray-700 text-sm border-none outline-none focus:ring ease-linear transition-all duration-150"
-                    defaultValue={narration}
+                    defaultValue={narration.concat(" (Transfer Narration)")}
                     disabled
                   />
                   <button
