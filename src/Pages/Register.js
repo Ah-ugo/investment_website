@@ -57,8 +57,8 @@ export default function Register() {
         referralCode: queryParam,
         Image: Parsepass,
         phoneNumber: phone,
-        investment_amount: investment,
-        return_rate: investment / 2,
+        investment_amount: parseInt(investment),
+        return_rate: parseInt(investment / 2),
       })
         .then((res) => {
           setLoading(false);
@@ -87,7 +87,11 @@ export default function Register() {
   };
   return (
     <div>
-      <Modal title="Successful Registration" open={successAlert} footer={null}>
+      <Modal
+        title="Successful Registration"
+        open={successAlert}
+        footer={null}
+        onCancel={!successAlert}>
         <div className="flex gap-2 align-middle items-center">
           <SmileOutlined height={45} width={45} size={38} />
           <p>
