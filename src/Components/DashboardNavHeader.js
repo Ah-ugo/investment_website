@@ -24,8 +24,8 @@ const navigation = [
   { name: "Reports", href: "#", current: false },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
+  { name: "Your Profile", href: "/profile" },
+  { name: "Settings", href: "/settings" },
   {
     name: "Sign out",
     href: "#",
@@ -61,8 +61,8 @@ export default function DashboardNavHeader(props) {
     { name: "Reports", href: "#", current: false },
   ];
   const userNavigation = [
-    { name: "Your Profile", href: "#" },
-    { name: "Settings", href: "#" },
+    { name: "Your Profile", href: "/profile" },
+    { name: "Settings", href: "/settings" },
     {
       name: "Sign out",
       href: "#",
