@@ -12,6 +12,8 @@ import Withdraw from "./Pages/UserDashboardFold/Withdraw";
 import { useState, useEffect } from "react";
 import Deposit from "./Pages/UserDashboardFold/Deposit";
 import { HelmetProvider } from "react-helmet-async";
+import Profile from "./Pages/UserDashboardFold/Profile";
+import Settings from "./Pages/UserDashboardFold/settings";
 
 function App() {
   const [auth, setAuth] = useState(false);
@@ -50,6 +52,14 @@ function App() {
           <Route
             path="/deposit"
             element={userData ? <Deposit /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/profile"
+            element={userData ? <Profile /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/settings"
+            element={userData ? <Settings /> : <Navigate to="/login" />}
           />
         </Routes>
       </BrowserRouter>

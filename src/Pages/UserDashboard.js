@@ -64,12 +64,12 @@ const items = [
   },
   { key: "5", icon: <BiWallet />, label: <Link to="/deposit">Deposits</Link> },
   // { key: "6", icon: <AiOutlineTeam />, label: <Link to={"#"}>Team</Link> },
-  { key: "7", icon: <UserOutlined />, label: <Link to={"#"}>Profile</Link> },
-  { key: "8", icon: <IoShareOutline />, label: <Link to={"#"}>Referral</Link> },
+  { key: "7", icon: <UserOutlined />, label: <Link to={"/profile"}>Profile</Link> },
+  // { key: "8", icon: <IoShareOutline />, label: <Link to={"#"}>Referral</Link> },
   {
     key: "9",
     icon: <AiOutlineSetting />,
-    label: <Link to={"#"}>Settings</Link>,
+    label: <Link to={"/settings"}>Settings</Link>,
   },
 ];
 const UserDashboard = (props) => {

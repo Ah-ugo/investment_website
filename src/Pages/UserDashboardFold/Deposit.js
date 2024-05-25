@@ -14,9 +14,9 @@ import {
 import { Modal, Spin } from "antd";
 
 export default function Deposit() {
-  const [accountName, setAccountName] = useState("SigmaPhi Investment");
-  const [bankName, setBankName] = useState("Palmpay");
-  const [accountNumber, setAccountNumber] = useState("9011232567");
+  const [accountName, setAccountName] = useState("Safe Planet");
+  const [bankName, setBankName] = useState("BestStar MFB");
+  const [accountNumber, setAccountNumber] = useState("6000049847");
   const [userData, setUserData] = useState({});
   const userInfo = localStorage.getItem("userData122");
   const mainUser = JSON.parse(userInfo);
@@ -254,6 +254,7 @@ export default function Deposit() {
                   </button>
                 </div>
 
+                <div className="flex gap-2 justify-center items-center">
                 <div className="flex bg-white rounded shadow border my-2">
                   <input
                     type="text"
@@ -267,6 +268,8 @@ export default function Deposit() {
                     onClick={() => copyNarration()}>
                     Copy
                   </button>
+                </div>
+                <p className="text-sm text-red-500">*Use this as transfer narration*</p>
                 </div>
               </div>
             </div>
