@@ -30,7 +30,7 @@ export default function Deposit() {
   const [successAlert, setSuccessAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
   // paystack states
-  const publicKey = "pk_test_8f8736df30d72b3c427000bed14e1d5bf12e3b17"
+  const publicKey = "pk_live_c8bb84894c9de986e10df67ff807584d39b1df0a"
   const amount = mainUser?.investment_amount * 10**2 // Remember, set in kobo!
   const [email, setEmail] = useState("sigmaphi@yopmail.com")
   const [name, setName] = useState("")
