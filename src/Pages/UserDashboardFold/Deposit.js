@@ -12,6 +12,7 @@ import {
   SmileOutlined,
 } from "@ant-design/icons";
 import { Modal, Spin } from "antd";
+import { PaystackButton } from "react-paystack";
 
 export default function Deposit() {
   const [accountName, setAccountName] = useState("Safe Planet");
@@ -28,6 +29,28 @@ export default function Deposit() {
   const [loading, setLoading] = useState(false);
   const [successAlert, setSuccessAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
+  // paystack states
+  const publicKey = "pk_test_8f8736df30d72b3c427000bed14e1d5bf12e3b17"
+  const amount = mainUser?.investment_amount * 10**2 // Remember, set in kobo!
+  const [email, setEmail] = useState("sigmaphi@yopmail.com")
+  const [name, setName] = useState("")
+  const [phone, setPhone] = useState("")
+
+  const componentProps = {
+    email,
+    amount,
+    metadata: {
+      name,
+      phone,
+    },
+    publicKey,
+    text: "Pay Now",
+    onSuccess: () =>{
+      ConfirmDeposit();
+      // UpdateBalance();
+      alert("Thanks for doing business with us! Come back soon!!")},
+    onClose: () => alert("Wait! Don't leave :("),
+  }
 
   const copyAccountName = () => {
     copy(accountName);
@@ -66,6 +89,7 @@ export default function Deposit() {
   const payload = {
     amount: mainUser.investment_amount,
     userId: mainUser.objectId,
+    verified: true,
     investment_date: new Date().toISOString,
     return_amount: mainUser.return_rate,
   };
@@ -86,6 +110,15 @@ export default function Deposit() {
         console.log(err);
       });
   };
+
+  const UpdateBalance = () => {
+    const dataBal = {
+      balance: mainUser?.balance + mainUser.investment_amount
+    }
+    axios.patch("https://sigmaphi.b4a.io/users/me", dataBal, config).then((res)=>{
+      console.log(res)
+    }).catch((e)=>console.log(e))
+  }
 
   const UserDetails = () => {
     axios
@@ -189,43 +222,47 @@ export default function Deposit() {
                 <h2 className="text-gray-800 text-xl font-semibold">
                   Deposit Using
                 </h2>
-                <p className="text-gray-500 mb-1 text-xs">Bank Transfer</p>
+                <p className="text-gray-500 mb-1 text-xs">Paystack</p>
 
                 <div className="flex bg-white rounded shadow border my-2">
                   <input
                     type="text"
                     // O={(e) => setBankName(e.target.value)}
                     className="px-3 py-3 placeholder-gray-400 w-full text-gray-700 text-sm border-none outline-none focus:ring ease-linear transition-all duration-150"
-                    disabled
-                    defaultValue={bankName}
-                    value={bankName}
+                    // disabled
+                    placeholder="Username"
+                    defaultValue={mainUser.username}
+                    value={mainUser.username}
+                    onChange={(e)=>setName(e.target.value)}
                   />
-                  <button
+                  {/* <button
                     type="button"
                     className="btn w-16"
                     onClick={() => {
                       copyBankName();
                     }}>
                     Copy
-                  </button>
+                  </button> */}
                 </div>
                 <div className="flex bg-white rounded shadow border my-2">
                   <input
                     // onChange={(e) => setAccountName(e.target.value)}
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 w-full text-gray-700 text-sm border-none outline-none focus:ring ease-linear transition-all duration-150"
-                    defaultValue={accountName}
-                    value={accountName}
-                    disabled
+                    // defaultValue={phone}
+                    placeholder="Phone Number"
+                    value={phone}
+                    onChange={(e)=>setPhone(e.target.value)}
+                    // disabled
                   />
-                  <button
+                  {/* <button
                     type="button"
                     className="btn w-16"
                     onClick={() => copyAccountName()}>
                     Copy
-                  </button>
+                  </button> */}
                 </div>
-                <div className="flex bg-white rounded shadow border my-2">
+                {/* <div className="flex bg-white rounded shadow border my-2">
                   <input
                     type="text"
                     className="px-3 py-3 placeholder-gray-400 w-full text-gray-700 text-sm border-none outline-none focus:ring ease-linear transition-all duration-150"
@@ -238,7 +275,7 @@ export default function Deposit() {
                     onClick={() => copyAccountNumber()}>
                     Copy
                   </button>
-                </div>
+                </div> */}
                 <div className="flex bg-white rounded shadow border my-2">
                   <input
                     type="text"
@@ -246,15 +283,15 @@ export default function Deposit() {
                     defaultValue={"₦" + depositAmount}
                     disabled
                   />
-                  <button
+                  {/* <button
                     type="button"
                     className="btn w-16"
                     onClick={() => copyDepositAmount()}>
                     Copy
-                  </button>
+                  </button> */}
                 </div>
 
-                <div className="flex gap-2 justify-center items-center">
+                {/* <div className="flex gap-2 justify-center items-center">
                 <div className="flex bg-white rounded shadow border my-2">
                   <input
                     type="text"
@@ -270,19 +307,20 @@ export default function Deposit() {
                   </button>
                 </div>
                 <p className="text-sm text-red-500">*Use this as transfer narration*</p>
-                </div>
+                </div> */}
               </div>
             </div>
-            <div className="flex lg:hidden">
-              <button
+            <div className="flex">
+              {/* <button
                 className="bg-gray-800 shadow-sm hover:bg-gray-600 hover:text-gray-400 py-1.5 px-4 rounded text-sm leading-6 text-gray-50 font-semibold"
                 onClick={() => ConfirmDeposit()}>
                 Verify
-              </button>
+              </button> */}
+              <PaystackButton className="cursor-pointer text-center text-xs uppercase bg-gray-800 hover:bg-gray-600 font-bold text-blue-200 hover:text-blue-400 border-none rounded-md w-full h-12 mt-10" {...componentProps} />
             </div>
           </div>
-          <div className="hidden lg:flex">
-            <button
+          {/* <div className="hidden lg:flex"> */}
+            {/* <button
               className="bg-gray-800 shadow-sm hover:bg-gray-600 hover:text-gray-400 py-1.5 px-4 rounded text-sm leading-6 text-gray-50 font-semibold"
               onClick={() => ConfirmDeposit()}>
               {loading ? (
@@ -300,8 +338,9 @@ export default function Deposit() {
               ) : (
                 "Verify"
               )}
-            </button>
-          </div>
+            </button> */}
+            {/* <PaystackButton className="paystack-button" {...componentProps} /> */}
+          {/* </div> */}
         </div>
       </UserDashboard>
     </>
